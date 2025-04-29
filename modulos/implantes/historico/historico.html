@@ -1,0 +1,106 @@
+<div class="historico-container">
+    <h2>Histórico de Consumos</h2>
+    <hr class="divider">
+
+    <div class="filters-container">
+        <div class="filter-group">
+            <label for="filter-year">Año:</label>
+            <select id="filter-year">
+                <option value="">Todos</option>
+            </select>
+        </div>
+        <div class="filter-group">
+            <label for="filter-month">Mes:</label>
+            <select id="filter-month">
+                <option value="">Todos</option>
+            </select>
+        </div>
+        <div class="filter-group">
+            <label for="filter-status">Estado:</label>
+            <select id="filter-status">
+                <option value="">Todos</option>
+                <option value="Pendiente">Pendiente</option>
+                <option value="Completado">Completado</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="table-container" id="table-container" style="display: none;">
+        <table id="historico-table">
+            <thead>
+                <tr>
+                    <th style="width: 100px; min-width: 100px;">
+                        Estado
+                        <i class="fas fa-filter filter-icon" data-column="estado"></i>
+                        <span class="resize-handle"></span>
+                    </th>
+                    <th style="width: 100px; min-width: 100px;">
+                        Previsión
+                        <i class="fas fa-filter filter-icon" data-column="prevision"></i>
+                        <span class="resize-handle"></span>
+                    </th>
+                    <th style="width: 100px; min-width: 100px;">
+                        Admisión
+                        <i class="fas fa-filter filter-icon" data-column="admision"></i>
+                        <span class="resize-handle"></span>
+                    </th>
+                    <th style="width: 200px; min-width: 200px;">
+                        Nombre del Paciente
+                        <i class="fas fa-filter filter-icon" data-column="paciente"></i>
+                        <span class="resize-handle"></span>
+                    </th>
+                    <th style="width: 150px; min-width: 150px;">
+                        Médico
+                        <i class="fas fa-filter filter-icon" data-column="medico"></i>
+                        <span class="resize-handle"></span>
+                    </th>
+                    <th style="width: 120px; min-width: 120px;">
+                        Fecha de Cx
+                        <i class="fas fa-filter filter-icon" data-column="fechaCx"></i>
+                        <span class="resize-handle"></span>
+                    </th>
+                    <th style="width: 150px; min-width: 150px;">
+                        Proveedor
+                        <i class="fas fa-filter filter-icon" data-column="proveedor"></i>
+                        <span class="resize-handle"></span>
+                    </th>
+                    <th style="width: 100px; min-width: 100px;">
+                        Código
+                        <i class="fas fa-filter filter-icon" data-column="codigo"></i>
+                        <span class="resize-handle"></span>
+                    </th>
+                    <th style="width: 200px; min-width: 200px;">
+                        Descripción
+                        <i class="fas fa-filter filter-icon" data-column="descripcion"></i>
+                        <span class="resize-handle"></span>
+                    </th>
+                    <th style="width: 100px; min-width: 100px;">
+                        Cantidad
+                        <i class="fas fa-filter filter-icon" data-column="cantidad"></i>
+                        <span class="resize-handle"></span>
+                    </th>
+                    <th style="width: 100px; min-width: 100px;">
+                        Precio Sistema
+                        <i class="fas fa-filter filter-icon" data-column="precioSistema"></i>
+                        <span class="resize-handle"></span>
+                    </th>
+                    <th style="width: 120px; min-width: 120px;">
+                        Agrupación
+                        <i class="fas fa-filter filter-icon" data-column="agrupacion"></i>
+                        <span class="resize-handle"></span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <div class="pagination-container">
+        <button id="prev-btn" disabled>Anterior</button>
+        <button id="next-btn">Siguiente</button>
+        <button id="export-excel-btn">Descargar Excel</button>
+        <span id="page-info">Página 1 de 1</span>
+        <span id="total-records">Total de registros: 0</span>
+    </div>
+</div>
+<script src="historico.js" type="module"></script>

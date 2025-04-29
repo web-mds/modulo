@@ -1,0 +1,369 @@
+<div class="pacientes-container">
+    <h2>Registro de Pacientes</h2>
+    <hr class="divider">
+    <div class="form-container">
+        <div class="form-row">
+            <div class="form-group">
+                <label for="atributo">Atributo:</label>
+                <select id="atributo">
+                    <option value=""></option>
+                    <option value="Implantes">Implantes</option>
+                    <option value="Consignación">Consignación</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="prevision">Previsión:</label>
+                <div class="autocomplete-container">
+                    <input type="text" id="prevision" placeholder="Ingrese la previsión" autocomplete="off" class="preserve-case">
+                    <i class="fas fa-chevron-down autocomplete-icon"></i>
+                    <div class="autocomplete-suggestions" id="prevision-suggestions"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="admision">Admisión:</label>
+                <input type="text" id="admision" placeholder="Ingrese la admisión" autocomplete="off" class="preserve-case">
+            </div>
+            <div class="form-group">
+                <label for="nombre-paciente">Nombre del Paciente:</label>
+                <input type="text" id="nombre-paciente" placeholder="Ingrese el nombre del paciente" autocomplete="off" class="preserve-case">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label for="medico">Médico:</label>
+                <div class="autocomplete-container">
+                    <input type="text" id="medico" placeholder="Ingrese el médico" autocomplete="off" class="preserve-case">
+                    <i class="fas fa-chevron-down autocomplete-icon"></i>
+                    <div class="autocomplete-suggestions" id="medico-suggestions"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="fecha-cirugia">Fecha de Cirugía:</label>
+                <input type="date" id="fecha-cirugia" autocomplete="off">
+            </div>
+            <div class="form-group">
+                <label for="proveedor">Proveedor:</label>
+                <div class="autocomplete-container">
+                    <input type="text" id="proveedor" placeholder="Ingrese el proveedor" autocomplete="off" class="preserve-case">
+                    <i class="fas fa-chevron-down autocomplete-icon"></i>
+                    <div class="autocomplete-suggestions" id="proveedor-suggestions"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="estado">Estado:</label>
+                <select id="estado">
+                    <option value=""></option>
+                    <option value="Agendado">Agendado</option>
+                    <option value="Cargado">Cargado</option>
+                    <option value="Actualizar precio">Actualizar precio</option>
+                    <option value="Cargo Pendiente">Cargo Pendiente</option>
+                    <option value="Código pendiente">Código pendiente</option>
+                    <option value="Cotización pendiente">Cotización pendiente</option>
+                    <option value="Cuenta Cerrada">Cuenta Cerrada</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label for="fecha-cargo">Fecha de Cargo:</label>
+                <input type="date" id="fecha-cargo" autocomplete="off">
+            </div>
+            <div class="form-group">
+                <label for="informe">Informe:</label>
+                <select id="informe">
+                    <option value=""></option>
+                    <option value="Sí">Sí</option>
+                    <option value="No">No</option>
+                    <option value="Consignado">Consignado</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="total-cotizacion">Total Cotización:</label>
+                <input type="text" id="total-cotizacion" placeholder="Ingrese el total" autocomplete="off">
+            </div>
+            <div class="form-group form-group-button">
+                <button id="registrar-btn">Registrar</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="filters-container">
+        <div class="filter-group">
+            <label for="filter-year">Año:</label>
+            <select id="filter-year">
+                <option value="">Todos</option>
+            </select>
+        </div>
+        <div class="filter-group">
+            <label for="filter-month">Mes:</label>
+            <select id="filter-month">
+                <option value="">Todos</option>
+            </select>
+        </div>
+        <div class="filter-group">
+            <label for="filter-status">Estado:</label>
+            <select id="filter-status">
+                <option value="">Todos</option>
+                <option value="Agendado">Agendado</option>
+                <option value="Cargado">Cargado</option>
+                <option value="Actualizar precio">Actualizar precio</option>
+                <option value="Cargo Pendiente">Cargo Pendiente</option>
+                <option value="Código pendiente">Código pendiente</option>
+                <option value="Cotización pendiente">Cotización pendiente</option>
+                <option value="Cuenta Cerrada">Cuenta Cerrada</option>
+            </select>
+        </div>
+    </div>
+
+    <div id="register-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="spinner-container">
+                <span class="loader"></span>
+                <span class="spinner-text">Registrando... <span id="register-progress">0%</span></span>
+            </div>
+        </div>
+    </div>
+
+    <div id="success-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="success-message-container">
+                <i id="success-icon" class="fas"></i>
+                <div id="success-message" class="success-message"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="edit-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h2>Editar Paciente</h2>
+            <div class="form-container edit-form-container">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="edit-atributo">Atributo:</label>
+                        <select id="edit-atributo">
+                            <option value="">Seleccione un atributo</option>
+                            <option value="Implantes">Implantes</option>
+                            <option value="Consignación">Consignación</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-prevision">Previsión:</label>
+                        <div class="autocomplete-container">
+                            <input type="text" id="edit-prevision" placeholder="Ingrese la previsión" autocomplete="off" class="preserve-case">
+                            <i class="fas fa-chevron-down autocomplete-icon"></i>
+                            <div class="autocomplete-suggestions" id="edit-prevision-suggestions"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-admision">Admisión:</label>
+                        <input type="text" id="edit-admision" placeholder="Ingrese la admisión" autocomplete="off" class="preserve-case">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-nombre-paciente">Nombre del Paciente:</label>
+                        <input type="text" id="edit-nombre-paciente" placeholder="Ingrese el nombre del paciente" autocomplete="off" class="preserve-case">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="edit-medico">Médico:</label>
+                        <div class="autocomplete-container">
+                            <input type="text" id="edit-medico" placeholder="Ingrese el médico" autocomplete="off" class="preserve-case">
+                            <i class="fas fa-chevron-down autocomplete-icon"></i>
+                            <div class="autocomplete-suggestions" id="edit-medico-suggestions"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-fecha-cirugia">Fecha de Cirugía:</label>
+                        <input type="date" id="edit-fecha-cirugia" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-proveedor">Proveedor:</label>
+                        <div class="autocomplete-container">
+                            <input type="text" id="edit-proveedor" placeholder="Ingrese el proveedor" autocomplete="off" class="preserve-case">
+                            <i class="fas fa-chevron-down autocomplete-icon"></i>
+                            <div class="autocomplete-suggestions" id="edit-proveedor-suggestions"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-estado">Estado:</label>
+                        <select id="edit-estado">
+                            <option value="">Seleccione un estado</option>
+                            <option value="Agendado">Agendado</option>
+                            <option value="Cargado">Cargado</option>
+                            <option value="Actualizar precio">Actualizar precio</option>
+                            <option value="Cargo Pendiente">Cargo Pendiente</option>
+                            <option value="Código pendiente">Código pendiente</option>
+                            <option value="Cotización pendiente">Cotización pendiente</option>
+                            <option value="Cuenta Cerrada">Cuenta Cerrada</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="edit-fecha-cargo">Fecha de Cargo:</label>
+                        <input type="date" id="edit-fecha-cargo" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-informe">Informe:</label>
+                        <select id="edit-informe">
+                            <option value="">Seleccione una opción</option>
+                            <option value="Sí">Sí</option>
+                            <option value="No">No</option>
+                            <option value="Consignado">Consignado</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-total-cotizacion">Total Cotización:</label>
+                        <input type="text" id="edit-total-cotizacion" placeholder="Ingrese el total" autocomplete="off">
+                    </div>
+                    <div class="form-group form-group-button">
+                        <button id="save-edit-btn">Guardar</button>
+                        <button id="cancel-edit-btn">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="loading-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="spinner-container">
+                <span class="loader"></span>
+                <span class="spinner-text">Cargando pacientes... <span id="loading-progress">0%</span></span>
+            </div>
+        </div>
+    </div>
+
+    <div id="delete-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <p id="delete-message"></p>
+            <div class="modal-buttons">
+                <button id="confirm-delete-btn">Sí</button>
+                <button id="cancel-delete-btn">No</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-container" id="table-container" style="display: none;">
+        <table id="pacientes-table">
+            <thead>
+                <tr>
+                    <th style="width: 90px; min-width: 90px;">
+                        Acciones
+                        <span class="resize-handle"></span>
+                    </th>
+                    <th style="width: 120px; min-width: 120px;">
+                        Fecha de Ingreso
+                        <i class="fas fa-filter filter-icon" data-column="fechaIngreso"></i>
+                        <span class="resize-handle"></span>
+                    </th>
+                    <th style="width: 100px; min-width: 100px;">
+                        Atributo
+                        <i class="fas fa-filter filter-icon" data-column="atributo"></i>
+                        <span class="resize-handle"></span>
+                    </th>
+                    <th style="width: 100px; min-width: 100px;">
+                        Previsión
+                        <i class="fas fa-filter filter-icon" data-column="prevision"></i>
+                        <span class="resize-handle"></span>
+                    </th>
+                    <th style="width: 100px; min-width: 100px;">
+                        Admisión
+                        <i class="fas fa-filter filter-icon" data-column="admision"></i>
+                        <span class="resize-handle"></span>
+                    </th>
+                    <th style="width: 200px; min-width: 200px;">
+                        Nombre del Paciente
+                        <i class="fas fa-filter filter-icon" data-column="nombrePaciente"></i>
+                        <span class="resize-handle"></span>
+                    </th>
+                    <th style="width: 150px; min-width: 150px;">
+                        Médico
+                        <i class="fas fa-filter filter-icon" data-column="medico"></i>
+                        <span class="resize-handle"></span>
+                    </th>
+                    <th style="width: 120px; min-width: 120px;">
+                        Fecha de Cirugía
+                        <i class="fas fa-filter filter-icon" data-column="fechaCirugia"></i>
+                        <span class="resize-handle"></span>
+                    </th>
+                    <th style="width: 150px; min-width: 150px;">
+                        Proveedor
+                        <i class="fas fa-filter filter-icon" data-column="proveedor"></i>
+                        <span class="resize-handle"></span>
+                    </th>
+                    <th style="width: 100px; min-width: 100px;">
+                        Estado
+                        <i class="fas fa-filter filter-icon" data-column="estado"></i>
+                        <span class="resize-handle"></span>
+                    </th>
+                    <th style="width: 120px; min-width: 120px;">
+                        Fecha de Cargo
+                        <i class="fas fa-filter filter-icon" data-column="fechaCargo"></i>
+                        <span class="resize-handle"></span>
+                    </th>
+                    <th style="width: 200px; min-width: 200px;">
+                        Informe
+                        <i class="fas fa-filter filter-icon" data-column="informe"></i>
+                        <span class="resize-handle"></span>
+                    </th>
+                    <th style="width: 100px; min-width: 100px;">
+                        Total Cotización
+                        <i class="fas fa-filter filter-icon" data-column="totalCotizacion"></i>
+                        <span class="resize-handle"></span>
+                    </th>
+                    <th style="width: 200px; min-width: 200px;">
+                        Admisión/Empresa
+                        <i class="fas fa-filter filter-icon" data-column="admisionEmpresa"></i>
+                        <span class="resize-handle"></span>
+                    </th>
+                    <th style="width: 250px; min-width: 250px;">
+                        Duplicado
+                        <i class="fas fa-filter filter-icon" data-column="duplicado"></i>
+                        <span class="resize-handle"></span>
+                    </th>
+                    <th style="width: 100px; min-width: 100px;">
+                        Día
+                        <i class="fas fa-filter filter-icon" data-column="dia"></i>
+                        <span class="resize-handle"></span>
+                    </th>
+                    <th style="width: 100px; min-width: 100px;">
+                        Semana
+                        <i class="fas fa-filter filter-icon" data-column="semana"></i>
+                        <span class="resize-handle"></span>
+                    </th>
+                    <th style="width: 100px; min-width: 100px;">
+                        Año
+                        <i class="fas fa-filter filter-icon" data-column="año"></i>
+                        <span class="resize-handle"></span>
+                    </th>
+                    <th style="width: 100px; min-width: 100px;">
+                        Mes
+                        <i class="fas fa-filter filter-icon" data-column="mes"></i>
+                        <span class="resize-handle"></span>
+                    </th>
+                    <th style="width: 150px; min-width: 150px;">
+                        Usuario
+                        <i class="fas fa-filter filter-icon" data-column="usuario"></i>
+                        <span class="resize-handle"></span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <div class="pagination-container">
+        <button id="prev-btn" disabled>Anterior</button>
+        <button id="next-btn">Siguiente</button>
+        <button id="export-excel-btn">Descargar Excel</button>
+        <label for="import-excel-btn" class="import-label">
+            <input type="file" id="import-excel-btn" accept=".xlsx" style="display: none;">
+            <span>Importar Excel</span>
+        </label>
+        <button id="download-format-btn">Descargar Formato</button>
+        <span id="page-info">Página 1 de 1</span>
+        <span id="total-records">Total de registros: 0</span>
+    </div>
+</div>
+<script src="pacientes.js" type="module"></script>

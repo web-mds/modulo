@@ -1,0 +1,380 @@
+<div class="consumos-container">
+    <h2>Registro de Consumos</h2>
+    <hr class="divider">
+    <div class="form-container">
+        <div class="form-row">
+            <div class="form-group">
+                <label for="admision">Admisión:</label>
+                <input type="text" id="admision" placeholder="Ingrese la admisión" autocomplete="off"
+                    class="preserve-case">
+            </div>
+            <div class="form-group">
+                <label for="cotizacion">N° Cotización:</label>
+                <input type="text" id="cotizacion" placeholder="Ingrese el número de cotización" autocomplete="off"
+                    class="preserve-case">
+            </div>
+            <div class="form-group">
+                <label for="referencia">Referencia:</label>
+                <input type="text" id="referencia" placeholder="Ingrese la referencia" autocomplete="off"
+                    class="preserve-case">
+            </div>
+            <div class="form-group">
+                <label for="cantidad">Cantidad:</label>
+                <input type="number" id="cantidad" placeholder="Ingrese la cantidad" step="1" autocomplete="off">
+            </div>
+            <div class="form-group form-group-button">
+                <button id="ingresar-btn">Ingresar</button>
+                <button id="limpiar-btn">Limpiar</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-container">
+        <div class="text-row">
+            <div class="text-group">
+                <label>Previsión:</label>
+                <span id="text-prevision"></span>
+            </div>
+            <div class="text-group">
+                <label>Paciente:</label>
+                <span id="text-paciente"></span>
+            </div>
+            <div class="text-group">
+                <label>Médico:</label>
+                <span id="text-medico"></span>
+            </div>
+            <div class="text-group">
+                <label>Fecha de Cx:</label>
+                <span id="text-fecha-cx"></span>
+            </div>
+        </div>
+        <div class="text-row">
+            <div class="text-group">
+                <label>Proveedor:</label>
+                <span id="text-proveedor"></span>
+            </div>
+            <div class="text-group">
+                <label>Código:</label>
+                <span id="text-codigo"></span>
+            </div>
+            <div class="text-group">
+                <label>Descripción:</label>
+                <span id="text-descripcion"></span>
+            </div>
+            <div class="text-group">
+                <label>Precio:</label>
+                <span id="text-cantidad"></span>
+            </div>
+            <div class="text-group">
+                <label>Agrupación:</label>
+                <span id="text-agrupacion"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="filters-container">
+        <div class="filter-group">
+            <label for="filter-year">Año:</label>
+            <select id="filter-year">
+                <option value="">Todos</option>
+            </select>
+        </div>
+        <div class="filter-group">
+            <label for="filter-month">Mes:</label>
+            <select id="filter-month">
+                <option value="">Todos</option>
+            </select>
+        </div>
+        <div class="filter-group">
+            <label for="filter-status">Estado:</label>
+            <select id="filter-status">
+                <option value="">Todos</option>
+                <option value="Pendiente">Pendiente</option>
+                <option value="Completado">Completado</option>
+            </select>
+        </div>
+    </div>
+
+    <div id="register-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="spinner-container">
+                <span class="loader"></span>
+                <span class="spinner-text">Ingresando... <span id="register-progress">0%</span></span>
+            </div>
+        </div>
+    </div>
+
+    <div id="success-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="success-message-container">
+                <i id="success-icon" class="fas"></i>
+                <div id="success-message" class="success-message"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="edit-modal" class="modal" style="display: none;">
+        <div class="modal-content edit-form-container">
+            <h2>Editar Consumo</h2>
+            <div class="form-container">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="edit-admision">Admisión</label>
+                        <input type="text" id="edit-admision" class="preserve-case" placeholder="Ingrese Admisión">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-cotizacion">N° Cotización</label>
+                        <input type="text" id="edit-cotizacion" class="preserve-case" placeholder="Ingrese Cotización">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-referencia">Referencia</label>
+                        <input type="text" id="edit-referencia" class="preserve-case" placeholder="Ingrese Referencia">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-cantidad">Cantidad</label>
+                        <input type="number" id="edit-cantidad" min="1" placeholder="Ingrese Cantidad">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-precio">Precio</label>
+                        <input type="text" id="edit-precio" class="preserve-case" placeholder="Ingrese Precio">
+                    </div>
+                </div>
+            </div>
+            <div class="text-container">
+                <div class="text-row">
+                    <div class="text-group">
+                        <label>Previsión</label>
+                        <span id="edit-text-prevision"></span>
+                    </div>
+                    <div class="text-group">
+                        <label>Nombre del Paciente</label>
+                        <span id="edit-text-paciente"></span>
+                    </div>
+                    <div class="text-group">
+                        <label>Médico</label>
+                        <span id="edit-text-medico"></span>
+                    </div>
+                    <div class="text-group">
+                        <label>Fecha de Cx</label>
+                        <span id="edit-text-fecha-cx"></span>
+                    </div>
+                </div>
+                <div class="text-row">
+                    <div class="text-group">
+                        <label>Proveedor</label>
+                        <span id="edit-text-proveedor"></span>
+                    </div>
+                    <div class="text-group">
+                        <label>Código</label>
+                        <span id="edit-text-codigo"></span>
+                    </div>
+                    <div class="text-group">
+                        <label>Descripción</label>
+                        <span id="edit-text-descripcion"></span>
+                    </div>
+                    <div class="text-group">
+                        <label>Precio</label>
+                        <span id="edit-text-precio-display"></span>
+                    </div>
+                    <div class="text-group">
+                        <label>Agrupación</label>
+                        <span id="edit-text-agrupacion"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group-button">
+                <button id="save-edit-btn">Guardar</button>
+                <button id="cancel-edit-btn">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="loading-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="spinner-container">
+                <span class="loader"></span>
+                <span class="spinner-text">Cargando consumos... <span id="loading-progress">0%</span></span>
+            </div>
+        </div>
+    </div>
+
+    <div id="delete-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <p id="delete-message"></p>
+            <div class="modal-buttons">
+                <button id="confirm-delete-btn">Sí</button>
+                <button id="cancel-delete-btn">No</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-container" id="table-container" style="display: none;">
+        <table id="consumos-table">
+            <thead>
+                <tr>
+                    <th style="width: 90px; min-width: 90px;">
+                        Acciones
+                        <span class="resize-handle"></span>
+                    </th>
+                    <th style="width: 100px; min-width: 100px;">
+                        Corporativo
+                        <i class="fas fa-filter filter-icon" data-column="corporativo"></i>
+                        <span class="resize-handle"></span>
+                    </th>
+                    <th style="width: 100px; min-width: 100px;">
+                        Estado
+                        <i class="fas fa-filter filter-icon" data-column="estado"></i>
+                        <span class="resize-handle"></span>
+                    </th>
+                    <th style="width: 100px; min-width: 100px;">
+                        ID
+                        <i class="fas fa-filter filter-icon" data-column="id"></i>
+                        <span class="resize-handle"></span>
+                    </th>
+                    <th style="width: 100px; min-width: 100px;">
+                        Código
+                        <i class="fas fa-filter filter-icon" data-column="codigo"></i>
+                        <span class="resize-handle"></span>
+                    </th>
+                    <th style="width: 100px; min-width: 100px;">
+                        Cantidad
+                        <i class="fas fa-filter filter-icon" data-column="cantidad"></i>
+                        <span class="resize-handle"></span>
+                    </th>
+                    <th style="width: 100px; min-width: 100px;">
+                        Venta
+                        <i class="fas fa-filter filter-icon" data-column="venta"></i>
+                        <span class="resize-handle"></span>
+                    </th>
+                    <th style="width: 150px; min-width: 150px;">
+                        Referencia
+                        <i class="fas fa-filter filter-icon" data-column="referencia"></i>
+                        <span class="resize-handle"></span>
+                    </th>
+                    <th style="width: 100px; min-width: 100px;">
+                        Precio
+                        <i class="fas fa-filter filter-icon" data-column="precio"></i>
+                        <span class="resize-handle"></span>
+                    </th>
+                    <th style="width: 100px; min-width: 100px;">
+                        N° Cotización
+                        <i class="fas fa-filter filter-icon" data-column="cotizacion"></i>
+                        <span class="resize-handle"></span>
+                    </th>
+                    <th style="width: 120px; min-width: 120px;">
+                        Total Cotización
+                        <i class="fas fa-filter filter-icon" data-column="totalCotizacion"></i>
+                        <span class="resize-handle"></span>
+                    </th>
+                    <th style="width: 120px; min-width: 120px;">
+                        Total Paciente
+                        <i class="fas fa-filter filter-icon" data-column="totalPaciente"></i>
+                        <span class="resize-handle"></span>
+                    </th>
+                    <th style="width: 120px; min-width: 120px;">
+                        Coincidencia
+                        <i class="fas fa-filter filter-icon" data-column="coincidencia"></i>
+                        <span class="resize-handle"></span>
+                    </th>
+                    <th style="width: 100px; min-width: 100px;">
+                        Previsión
+                        <i class="fas fa-filter filter-icon" data-column="prevision"></i>
+                        <span class="resize-handle"></span>
+                    </th>
+                    <th style="width: 100px; min-width: 100px;">
+                        Admisión
+                        <i class="fas fa-filter filter-icon" data-column="admision"></i>
+                        <span class="resize-handle"></span>
+                    </th>
+                    <th style="width: 200px; min-width: 200px;">
+                        Nombre del Paciente
+                        <i class="fas fa-filter filter-icon" data-column="paciente"></i>
+                        <span class="resize-handle"></span>
+                    </th>
+                    <th style="width: 150px; min-width: 150px;">
+                        Médico
+                        <i class="fas fa-filter filter-icon" data-column="medico"></i>
+                        <span class="resize-handle"></span>
+                    </th>
+                    <th style="width: 120px; min-width: 120px;">
+                        Fecha de Cx
+                        <i class="fas fa-filter filter-icon" data-column="fechaCx"></i>
+                        <span class="resize-handle"></span>
+                    </th>
+                    <th style="width: 150px; min-width: 150px;">
+                        Proveedor
+                        <i class="fas fa-filter filter-icon" data-column="proveedor"></i>
+                        <span class="resize-handle"></span>
+                    </th>
+                    <th style="width: 100px; min-width: 100px;">
+                        Código
+                        <i class="fas fa-filter filter-icon" data-column="codigo"></i>
+                        <span class="resize-handle"></span>
+                    </th>
+                    <th style="width: 200px; min-width: 200px;">
+                        Descripción
+                        <i class="fas fa-filter filter-icon" data-column="descripcion"></i>
+                        <span class="resize-handle"></span>
+                    </th>
+                    <th style="width: 100px; min-width: 100px;">
+                        Cantidad
+                        <i class="fas fa-filter filter-icon" data-column="cantidad"></i>
+                        <span class="resize-handle"></span>
+                    </th>
+                    <th style="width: 100px; min-width: 100px;">
+                        Precio Sistema
+                        <i class="fas fa-filter filter-icon" data-column="precioSistema"></i>
+                        <span class="resize-handle"></span>
+                    </th>
+                    <th style="width: 120px; min-width: 120px;">
+                        Agrupación
+                        <i class="fas fa-filter filter-icon" data-column="agrupacion"></i>
+                        <span class="resize-handle"></span>
+                    </th>
+                    <th style="width: 120px; min-width: 120px;">
+                        Total Item
+                        <i class="fas fa-filter filter-icon" data-column="totalItem"></i>
+                        <span class="resize-handle"></span>
+                    </th>
+                    <th style="width: 120px; min-width: 120px;">
+                        Adm/Proveedor
+                        <i class="fas fa-filter filter-icon" data-column="admProveedor"></i>
+                        <span class="resize-handle"></span>
+                    </th>
+                    <th style="width: 100px; min-width: 100px;">
+                        Margen
+                        <i class="fas fa-filter filter-icon" data-column="margen"></i>
+                        <span class="resize-handle"></span>
+                    </th>
+                    <th style="width: 150px; min-width: 150px;">
+                        Usuario
+                        <i class="fas fa-filter filter-icon" data-column="usuario"></i>
+                        <span class="resize-handle"></span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <div class="pagination-container">
+        <button id="prev-btn" disabled>Anterior</button>
+        <button id="next-btn">Siguiente</button>
+        <div class="export-menu-container">
+            <button id="export-excel-btn">Descargar Excel</button>
+            <div class="export-options" id="export-options" style="display: none;">
+                <button id="export-pending-btn">Descargar Consumo Pendiente</button>
+                <button id="export-complete-btn">Descargar Consumo Completo</button>
+                <button id="export-historic-btn">Descargar Archivo Histórico</button>
+            </div>
+        </div>
+        <label for="import-excel-btn" class="import-label">
+            <input type="file" id="import-excel-btn" accept=".xlsx" style="display: none;">
+            <span>Importar Excel</span>
+        </label>
+        <button id="download-format-btn">Descargar Formato</button>
+        <span id="page-info">Página 1 de 1</span>
+        <span id="total-records">Total de registros: 0</span>
+    </div>
+</div>
+<script src="consumos.js" type="module"></script>
